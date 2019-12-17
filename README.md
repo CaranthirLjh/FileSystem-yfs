@@ -3,7 +3,7 @@
   - To run this lab， you need to use a computer that has the FUSE module, library, and headers installed
   - You should be able to install these on your own machine by following the instructions at [fuse.sourceforge.net](https://github.com/libfuse/libfuse).
 
-    ## lab 1 & lab 2
+    ## [lab 1 & lab 2](https://github.com/TactfulYuu/FileSystem-yfs/tree/lab2)
     ### Implement a basic file system
     - Mainly focus on implementing parts shown in this image
     ![Lab1 Part 2](https://github.com/TactfulYuu/yfs-lab/blob/master/img/lab1_part2_structure.png)
@@ -20,7 +20,7 @@
     - And I implement a lock server to ensure the correctness of the distributed file system. At any point in time, there is at most one client holding a lock with a given identifier. 
     - The lock server is based on the principle of ticket lock. Each RPC procedure is identified by a unique procedure number. 
     - Acquire lock in the correct place in yfs_client to ensure the atomicity of file system.
-    ## lab 3
+    ## [lab 3](https://github.com/TactfulYuu/FileSystem-yfs/tree/lab3)
     ### Design the Protocol
     - First, make a design of the lock state before implement the lock protocol. Here is the five states of lock:
       - none: client knows nothing about this lock
@@ -33,7 +33,7 @@
       - **Lock Protocol**: When a client asks for a lock with an acquire request, the server grants the lock and responds with OK if the lock is not owned by another client (lock's state is **free**). If the lock's state is not **free**, and there are other clients waiting for the lock, the server responds with a RETRY. Otherwise, the server sends a revoke request to the owner of the lock, and waits for the lock to be released by the owner. Finally, the server sends a retry to the next waiting client, grants the lock and responds with OK.
       - **Lock Cache**: Once a client has acquired a lock, the client the lock in its cache (client keeps the lock instead of sending a release request to the server when a thread of the client releases the lock). The client can grant the lock to other threads on the same client without interacting with the server.
       - **Rovoke Request**: The server sends the client a revoke request to get the lock back. This request tells the client that it should send the lock back to the server when it releases the lock or right now if no thread on the client is holding the lock.
-    ## lab 4
+    ## [lab 4](https://github.com/TactfulYuu/FileSystem-yfs/tree/lab3)
     - Deploy this distributed file system to Tencent Cloud Server.
     - Fix some bugs in inode_manager:
       - Change the data structure of bitmap.
